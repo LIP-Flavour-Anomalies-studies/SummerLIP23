@@ -1,0 +1,11 @@
+5.160062851591077  #left sideband edge
+5.39018041159181  #right sideband edge
+1806764.9495325023  #signal yield
+759191.0  #left sideband background yield (histogram)
+234859.0  #right sideband background yield (histogram)
+526204.9481150659  #peak region background yield (histogram)
+736041.6386893298  #left sideband background yield (exp integral)
+234730.1291535035  #right sideband background yield (exp integral)
+549483.1802722324  #peak region background yield (exp integral)
+0.566027153316631  #background scaling factor
+0.6775245759417494  #signal scaling factor 
