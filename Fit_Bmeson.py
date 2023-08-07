@@ -56,7 +56,6 @@ dh = RooDataHist("dh", "dh", args, hmass)
 Lambda = RooRealVar("lambda", "lambda", -0.3, -4.0, 0.0)
 background = RooExponential("background", "background", mass, Lambda)
 
-
 #Define a signal model (Gaussian + CB) and its parameters
 #Gaussian model
 mean = RooRealVar("mean", "mean", 0.5*(mmin+mmax), mmin, mmax)
@@ -68,7 +67,6 @@ sigma2 = RooRealVar("sigma2", "sigma2", 0.01 ,0., 0.5)
 alpha2 = RooRealVar("alpha2", "alpha2",  1.5, 0.3, 15.)
 n2 = RooRealVar("n2", "n2", 1.2, 0.3, 15.)
 signal2 = RooCBShape("signal2", "signal2", mass, mean, sigma2, alpha2, n2)
-
 
 
 #Define variables for the number of signal and background events
@@ -94,8 +92,6 @@ model = RooAddPdf("model", "model", RooArgList(signal, background), RooArgList(n
 
 #Perform the fit
 model.fitTo(dh)
-
-
 
 
 
@@ -131,10 +127,8 @@ for bin in range(1, nbins+1):
     elif bin_edge_low >= sideband_edge2:
        bkg_count2+=bin_count
 
-
 #Background in the peak region
 bkg_count3 = n_back.getVal() - bkg_count1 - bkg_count2
-
 
 
 
@@ -164,15 +158,15 @@ bkg_events1 = bkg_int1 * n_back.getVal()
 bkg_events2 = bkg_int2 * n_back.getVal()
 bkg_events3 = bkg_int3 * n_back.getVal()
 
-
-print(f" p1 = {bkg_int1}, p2 = {bkg_int2}, p3 = {bkg_int3} \n Total p = {bkg_int1+bkg_int2+bkg_int3}")
+#print(f" p1 = {bkg_int1}, p2 = {bkg_int2}, p3 = {bkg_int3} \n Total p = {bkg_int1+bkg_int2+bkg_int3}")
 
 
 #Background scalling factor
 fb = bkg_events3 / (bkg_events1+bkg_events2)
 
 
-
+#################################################################
+#################################################################
 
 
 #Opening MC root file
@@ -195,9 +189,7 @@ model.plotOn(frame,RooFit.Name("modelSig"),RooFit.Components("signal"),RooFit.Li
 model.plotOn(frame,RooFit.Name("modelBkg"),RooFit.Components("background"),RooFit.LineStyle(ROOT.kDashed),RooFit.LineColor(ROOT.kGreen))
 model.plotOn(frame,RooFit.Name("model"))
 
-
 c = ROOT.TCanvas("c","",800,600)
-
 frame.Draw()
 
 
@@ -221,7 +213,6 @@ l2.Draw()
 
 
 
-
 #Draw a caption
 legend = TLegend(0.65,0.6,0.88,0.85)
 legend.SetBorderSize(0)
@@ -232,6 +223,7 @@ legend.AddEntry(frame.findObject("modelBkg"),"Background fit","1pe")
 legend.AddEntry(frame.findObject("modelSig"),"Signal fit","1pe")
 legend.AddEntry(frame.findObject("model"),"Global fit","1pe")
 legend.Draw()
+
 
 
 #Display info and fit results
@@ -252,16 +244,13 @@ variables = 8 # This is the number of free parameters in our model
 
 L.DrawLatex(0.15,0.40,ROOT.Form("#chi^{2}/ndf = %.2f" % frame.chiSquare(variables)))
 
-
 #L.DrawLatex(0.65,0.50,ROOT.Form("Y_{b1} : %d events" % int(bkg_count1)))
 #L.DrawLatex(0.65,0.45,ROOT.Form("Y_{b2} : %d events" % int(bkg_count2)))
 #L.DrawLatex(0.65,0.40,ROOT.Form("Y_{b3} : %d events" % int(bkg_count3)))
 
-
 #Draw the last line of text and set its color to red
 L.SetTextColor(ROOT.kRed)
 L.DrawLatex(0.15, 0.35, "Gauss + CB")
-
 
 
 c.Draw()
