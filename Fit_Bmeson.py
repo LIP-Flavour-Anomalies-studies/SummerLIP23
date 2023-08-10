@@ -17,6 +17,7 @@ from ROOT import TLatex
 from ROOT import RooChi2Var
 from ROOT import RooFormulaVar
 import numpy as np
+import math
 import time
 #import uproot
 
@@ -98,7 +99,7 @@ model.fitTo(dh)
 
 #Total average and std dev. for Gaussian + CB fit
 Mean = mean.getVal()
-Sigma = sigma1.getVal() * sig1_frac.getVal() + ( 1 - sig1_frac.getVal() ) * sigma2.getVal()
+Sigma = math.sqrt(sig1_frac.getVal() * sigma1.getVal()**2 + (1 - sig1_frac.getVal()) * sigma2.getVal()**2)
 
 #Sideband edges for 3.5sigma
 sideband_edge1 = Mean - 3.5 * Sigma
@@ -254,7 +255,7 @@ L.DrawLatex(0.15, 0.35, "Gauss + CB")
 
 
 c.Draw()
-c.SaveAs("/home/t3cms/joaobss/SummerLIP23/fit_bmeson.png")
+c.SaveAs("/user/j/joaobss/SummerLIP23/fit_bmeson.png")
 
 
 
@@ -272,8 +273,3 @@ f.write(f"""{sideband_edge1}  #left sideband edge
 {fb}  #background scaling factor
 {fs}  #signal scaling factor """)
 f.close()
-
-
-#Force the program to keep running
-while True:
-  time.sleep(10)
