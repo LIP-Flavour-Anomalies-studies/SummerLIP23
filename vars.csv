@@ -1,0 +1,15 @@
+var_name,composite,bin,min,max,legend,log
+bLBS,0,100,0,1.2,Flight length from beam spot (cm),0
+bLBSE,0,150,0,0.08,Flight length from beam spot error (cm),1
+bLBS/bLBSE,1,100,0,150,bLBS Ratio,0
+bCosAlphaBS,0,100,0.8,1,Cos(#alpha ),1
+(1-bCosAlphaBS)/bCosAlphaBSE,1,100,0,0.05,Cos(#alpha ) Ratio,1
+bVtxCL,0,100,0,1,Vertex CL,0
+kstTrkmDCABS,0,150,-1,1,K* DCA from BS negative track (cm),1
+kstTrkpDCABS,0,150,-1,1,K* DCA from BS positive track (cm),1
+mu1Pt,0,150,0,50,Muon1 P_{T} (GeV),0
+mu2Pt,0,150,0,22,Muon2 P_{T} (GeV),0
+kstTrkmPt,0,100,0,20,K* P_{T} negative track (GeV),0
+kstTrkpPt,0,100,0,20,K* P_{T} positive track (GeV),0
+tagB0,0,10,-0.5,1.5,B-candidate tag,0
+tagged_mass,0,150,5,5.6,B-candidate mass (GeV),0
