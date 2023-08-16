@@ -10,6 +10,9 @@ import sys
 import os
 import pandas as pd
 
+
+##THIS IS THE UPDATED VERSION OF THIS CODE
+
 ##MAKE OPTION FOR NORMALIZED OR NOT
 ##MAKE OPTION FOR SIMPLE HISTOGRAM PLOTS
 ##OPTION FOR ROOT FILE WITH OTHER TREENAME OTHER THAN NTUPLE
@@ -35,31 +38,37 @@ df.columns = df.columns.str.strip()
 Tree=data["ntuple"]
 Tree_mc=data_mc["ntuple"]
 
-def hist_normal(v,minv,maxv):
-    signal=Tree.arrays(v)
-    signal_mc=Tree_mc.arrays(v)
+
+def get_normal(v):
+    signal=Tree.arrays(v,library="np")
+    background=Tree_mc.arrays(v,library="np")
+    return signal,background
+
+def get_composite(v):
+    signal=Tree.arrays(v,aliases={v:v},library="np")
+    background=Tree_mc.arrays(v,aliases={v:v},library="np")
+    return signal,background
+
+
+def hist(v,signal,background, minv,maxv,bins,logscale,legend):
 
     plt.figure()
-    plt.hist(signal[v],bins=50,alpha=0.5,density=normalized,label="data")
-    plt.title(v)
-    plt.hist(signal_mc[v],bins=50,alpha=0.5,density=normalized,label="MC")
-    plt.legend(loc='upper right')
-    try:
-        plt.xlim(minv,maxv)
-    except ValueError:
-        pass
-    plt.savefig(v+'hist.png')
+    
+    data_hist, data_bin_edges = np.histogram(signal[v], bins=bins, range=(minv,maxv))
+    mc_hist, mc_bin_edges = np.histogram(background[v], bins=bins, range=(minv,maxv))
 
-def hist_composite(v,minv,maxv):
-    #print("i am composite", v)
-    newvar1=Tree.arrays(v,aliases={v:v},library="pd")
-    newvar2=Tree_mc.arrays(v,aliases={v:v},library="pd")
+    data_bin_centers = (data_bin_edges[:-1] + data_bin_edges[1:]) / 2
+    mc_bin_centers = (mc_bin_edges[:-1] + mc_bin_edges[1:]) / 2
 
-    plt.figure()
-    plt.hist(newvar1,bins=50,alpha=0.5,density=normalized,label="data")
-    plt.title(v)
-    plt.hist(newvar2,bins=50,alpha=0.5,density=normalized,label="MC")
+    plt.bar(data_bin_centers, data_hist, width=np.diff(data_bin_edges), color='red', alpha=0.5, label='Background') # Data (Bkg)
+    plt.bar(mc_bin_centers, mc_hist, width=np.diff(mc_bin_edges), color='blue', alpha=0.5, label='Signal') # MC (Signal)
+
     plt.legend(loc='upper right')
+    plt.xlabel(legend)
+
+    if logscale==1:
+        plt.yscale('log')
+
     try:
         plt.xlim(minv,maxv)
     except ValueError:
@@ -75,22 +84,31 @@ def hist_composite(v,minv,maxv):
 
 
 
+
+
 def save_all(file,folder): ## saves all histograms in folder
 
     variables_path = file #'variables.xlsx'
-    df = pd.read_excel(variables_path,header=0)
+    df = pd.read_csv(variables_path, header=0)
     df.columns = df.columns.str.strip()
-    os.chdir("/home/t3cms/u23madalenablanc/flavour-anomalies/"+folder)
+    os.chdir("/user/u/u23madalenablanc/flavour-anomalies/"+folder)
     print(df["var_name"])
     df["var_name"]=df["var_name"].str.strip()
     for v in df["var_name"]:   #.str.replace(" ", ""):
         composite_value = df.loc[df["var_name"] == v, "composite"].iloc[0]
         minv= df.loc[df["var_name"] == v, "min"].iloc[0]
         maxv= df.loc[df["var_name"] == v, "max"].iloc[0]
+        bins=df.loc[df["var_name"] == v, "bin"].iloc[0]
+        logscale=df.loc[df["var_name"] == v, "log"].iloc[0]
+        legend=df.loc[df["var_name"] == v, "legend"].iloc[0]
+
         print(f"{v}: composite = {composite_value}")
         if composite_value==0:
-            hist_normal(v,minv,maxv)
+            s,b=get_normal(v)
         elif (composite_value)==1:
-            hist_composite(v,minv,maxv)
+            s,b=get_composite(v)
+        hist(v,s,b,minv,maxv,bins,logscale,legend)
 
-save_all("variables.xlsx","plots") 
+
+
+save_all("vars.csv","plots2") 
