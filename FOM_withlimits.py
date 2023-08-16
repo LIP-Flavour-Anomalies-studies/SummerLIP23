@@ -13,7 +13,7 @@ import os
 
 #columns=["tagged_mass",var]
 
-sel="(tagged_mass<5.1) | (tagged_mass>5.44)"
+#sel="(tagged_mass<5.1) | (tagged_mass>5.44)"
 
 
 
@@ -31,12 +31,12 @@ Tree_mc=data_mc["ntuple"]
 
 
 folder="plot_fom"
-variables_path = 'variables.xlsx'
-df = pd.read_excel(variables_path,header=0)
+variables_path = 'vars.csv'
+df = pd.read_csv(variables_path, header=0)
 df.columns = df.columns.str.strip()
 
 
-os.chdir("/home/t3cms/u23madalenablanc/"+folder)
+#os.chdir("/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/"+folder)
 
 
 
@@ -56,6 +56,7 @@ def get_signal_composite(v,sel):
 
 
 def calc_fom(v,signal,background,minv,maxv,fs,fb):
+    os.chdir("/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/"+folder)
 
     num_points=20
 
@@ -97,10 +98,43 @@ def calc_fom(v,signal,background,minv,maxv,fs,fb):
 
 
 
-#scaling factor, signal
-fs=0.67752
-#scaling factor, background
-fb=0.74094
+
+
+
+file=open("/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/Fit results/B0Fit_3.5sigma_results.txt","r")
+
+str1="left sideband edge"
+str2="right sideband edge"
+str3="background scaling factor"
+str4="signal scaling factor "
+
+def get_value(line):
+    value=""
+    
+    for c in line:
+        if c.isdigit() or c==".":
+            value += c
+        else:
+            break
+            
+    return value
+
+
+for line in file:
+    if str1 in line:
+        left_edge=get_value(line)
+    elif str2 in line:
+        right_edge=get_value(line)
+    elif str3 in line:
+        fb=float(get_value(line))
+    elif str4 in line:
+        fs=float(get_value(line))
+
+sel="(tagged_mass<" + left_edge+ ") | (tagged_mass>" +right_edge + ")"
+
+
+
+
 
 df["var_name"]=df["var_name"].str.strip()
 for v in df["var_name"]:  
