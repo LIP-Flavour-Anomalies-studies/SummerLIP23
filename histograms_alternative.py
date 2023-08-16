@@ -60,11 +60,18 @@ def hist(v,signal,background, minv,maxv,bins,logscale,legend):
     data_bin_centers = (data_bin_edges[:-1] + data_bin_edges[1:]) / 2
     mc_bin_centers = (mc_bin_edges[:-1] + mc_bin_edges[1:]) / 2
 
+    if normalized:
+        #Normalize the histogram bin counts
+        data_hist = data_hist / np.sum(data_hist)
+        mc_hist = mc_hist / np.sum(mc_hist)
+
     plt.bar(data_bin_centers, data_hist, width=np.diff(data_bin_edges), color='red', alpha=0.5, label='Background') # Data (Bkg)
     plt.bar(mc_bin_centers, mc_hist, width=np.diff(mc_bin_edges), color='blue', alpha=0.5, label='Signal') # MC (Signal)
 
     plt.legend(loc='upper right')
     plt.xlabel(legend)
+
+
 
     if logscale==1:
         plt.yscale('log')
