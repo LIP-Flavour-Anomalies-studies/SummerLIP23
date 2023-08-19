@@ -1,8 +1,0 @@
-variables signal vs background
-
-
-tagged_mass (we dont use bmass / bBarMass)
-signal : MC
-bkg only: sidebands in data
-
-for this we compare the distributions first with the vars

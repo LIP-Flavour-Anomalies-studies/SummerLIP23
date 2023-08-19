@@ -58,18 +58,20 @@ def get_signal_composite(v,sel):
 def calc_fom(v,signal,background,minv,maxv,fs,fb):
     os.chdir("/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/"+folder)
 
-    num_points=20
+    num_points=100
 
     while True:
         try:
             step = (maxv - minv) / (num_points - 1)
             var_range = np.arange(minv, maxv , step)
+
             break
         except ValueError:
             minv=signal[v].min()
             maxv=signal[v].max()
     
     fom=[]
+    fom_opposite=[]
 
     for i in var_range:
         s=0;b=0;f=0
@@ -81,13 +83,26 @@ def calc_fom(v,signal,background,minv,maxv,fs,fb):
         b = np.sum(background[v] > i)
         b=b*fb
 
+        s_opposite=np.sum(signal[v]<i)
+        s_opposite*=fs
+        b_opposite = np.sum(background[v] < i)
+        b_opposite*=fb
+
+
         f=s/(s+b)**0.5
         #print(str(i)+" , figure of merit:"+str(f))
         fom.append(f)
 
+        if (s_opposite>0 or b_opposite>0):
+            fom_opposite.append(s_opposite/(s_opposite+b_opposite)**0.5)
+        else:
+            fom_opposite.append(0)
+
     plt.figure()
-    plt.plot(var_range,fom)
+    plt.plot(var_range,fom,label="lower cut")
+    plt.plot(var_range,fom_opposite,label="upper cut")
     plt.title(f"FOM for: {v}")
+    plt.legend()
     while True:
         try:
             plt.savefig(v+'hist.png')
@@ -95,6 +110,7 @@ def calc_fom(v,signal,background,minv,maxv,fs,fb):
         except FileNotFoundError:
             print("bad name")
             v=v.replace("/", "_div_")
+
 
 
 
@@ -148,5 +164,3 @@ for v in df["var_name"]:
     elif (composite_value)==1:
         signal,back=get_signal_composite(v,sel)
     calc_fom(v,signal,back,minv,maxv,fs,fb)
-
-
