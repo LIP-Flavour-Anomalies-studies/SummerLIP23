@@ -12,7 +12,6 @@ mu1Pt,0,150,0,50,Muon1 P_{T} (GeV),0,2.5
 mu2Pt,0,150,0,22,Muon2 P_{T} (GeV),0,4
 kstTrkmPt,0,100,0,20,K* P_{T} negative track (GeV),0,1.875
 kstTrkpPt,0,100,0,20,K* P_{T} positive track (GeV),0,1.875
-=======
 bLBS,0,100,0,1.2,Flight length (cm),0,0.1
 bLBSE,0,150,0,0.08,Flight length uncertainty (cm),1,0.05
 bLBS/bLBSE,1,100,0,150,Flight length significance,0,20
@@ -25,5 +24,4 @@ mu1Pt,0,150,0,50,Leading muon p_T (GeV),0,2.5
 mu2Pt,0,150,0,22,Trailing muon p_T (GeV),0,4
 kstTrkmPt,0,100,0,20,Negative track p_T (GeV),0,1.875
 kstTrkpPt,0,100,0,20,Positive track p_T (GeV),0,1.875
->>>>>>> 1761f5be10ffdd8ea9611b044f6ccef4ea6b3aaa
 tagB0,0,10,-0.5,1.5,B-candidate tag,0,0
