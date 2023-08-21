@@ -227,11 +227,26 @@ for v in df["var_name"]:
             print("bad name")
             v=v.replace("/", "_div_")
 
-#bar plot to compare results
-fig, ax = plt.subplots()
-bars_before = ax.bar(['Before', 'After'], [fom_before, fom_after])
-ax.set_ylabel('FOM')
-ax.set_title('FOM Before and After Cuts for {v}')
-ax.legend()
+# Create a single grouped bar plot
+x = np.arange(len(df["var_name"]))  # x-axis positions for variables
+width = 0.35  # Width of each bar
 
-plt.tight_layout()  
+fig, ax = plt.subplots()
+
+
+for idx, v in enumerate(df["var_name"]):
+    fom_values = fom_dict.get(v, [0, 0])  # Default to [0, 0] if v not found
+    bars_before = ax.bar(x[idx], fom_values[0], width, label=f'Before {v}', color='blue')
+    bars_after = ax.bar(x[idx] + width, fom_values[1], width, label=f'After {v}', color='orange')
+
+# Add labels, title, and remove legend
+ax.set_ylabel('FOM')
+ax.set_title('FOM Before and After Cuts by Variable')
+ax.set_xticks(x + width / 2)
+ax.set_xticklabels(df["var_name"], rotation=45, ha="right")
+ax.set_yscale('log')  # Set y-axis to logarithmic scale
+ax.legend().set_visible(False)  # Remove the legend
+
+plt.tight_layout()
+
+plt.savefig("compar.png")
