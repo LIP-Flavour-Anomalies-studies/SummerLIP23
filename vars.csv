@@ -1,4 +1,5 @@
 var_name,composite,bin,min,max,legend,log,best_cut
+<<<<<<< HEAD
 bLBS,0,100,0,1.2,Flight length from beam spot (cm),0,0
 bLBSE,0,150,0,0.08,Flight length from beam spot error (cm),1,0.05
 bLBS/bLBSE,1,100,0,150,bLBS Ratio,0,20
@@ -11,4 +12,18 @@ mu1Pt,0,150,0,50,Muon1 P_{T} (GeV),0,2.5
 mu2Pt,0,150,0,22,Muon2 P_{T} (GeV),0,4
 kstTrkmPt,0,100,0,20,K* P_{T} negative track (GeV),0,1.875
 kstTrkpPt,0,100,0,20,K* P_{T} positive track (GeV),0,1.875
+=======
+bLBS,0,100,0,1.2,Flight length (cm),0,0.1
+bLBSE,0,150,0,0.08,Flight length uncertainty (cm),1,0.05
+bLBS/bLBSE,1,100,0,150,Flight length significance,0,20
+bCosAlphaBS,0,100,0.8,1,Cos(#alpha ),1,0.95
+(1-bCosAlphaBS)/bCosAlphaBSE,1,100,0,0.05,Cos(#alpha ) Ratio,1,0.02
+bVtxCL,0,100,0,1,Vertex CL,0,0.35
+kstTrkmDCABS,0,150,-1,1,K* DCA from BS negative track (cm),1,-0.25
+kstTrkpDCABS,0,150,-1,1,K* DCA from BS positive track (cm),1,-0.1
+mu1Pt,0,150,0,50,Leading muon p_T (GeV),0,2.5
+mu2Pt,0,150,0,22,Trailing muon p_T (GeV),0,4
+kstTrkmPt,0,100,0,20,Negative track p_T (GeV),0,1.875
+kstTrkpPt,0,100,0,20,Positive track p_T (GeV),0,1.875
+>>>>>>> 1761f5be10ffdd8ea9611b044f6ccef4ea6b3aaa
 tagB0,0,10,-0.5,1.5,B-candidate tag,0,0
