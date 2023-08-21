@@ -186,15 +186,15 @@ for v in df["var_name"]:
         s,b=get_signal_normal(v,sel_tagged_mass_s,cut_b)
     elif (composite_value)==1:
         s,b=get_signal_composite(v,sel_tagged_mass_s,sel_tagged_mass_b)
-    fom_before=calc_fom(v,s,b,minv,maxv,minv)
+    fom_before=calc_fom(v,s,b,minv,maxv,cut)
     print(fom_before)
 
     if composite_value==0:
-        new_s,new_b=get_signal_normal(v,cut_s,cut_b)
+        new_s,new_b=get_signal_normal(v,sel_tagged_mass_s,sel_tagged_mass_b)
     elif (composite_value)==1:
-        new_s,new_b=get_signal_composite(v,cut_s,cut_b)
+        new_s,new_b=get_signal_composite(v,sel_tagged_mass_s,sel_tagged_mass_b)
 
-    fom_after=calc_fom(v,new_s,new_b,minv,maxv,minv)
+    fom_after=calc_fom(v,new_s,new_b,minv,maxv,cut)
     print(fom_after)
 
     fom_dict[v]=[fom_before,fom_after]
@@ -228,6 +228,10 @@ for v in df["var_name"]:
             v=v.replace("/", "_div_")
 
 #bar plot to compare results
+fig, ax = plt.subplots()
+bars_before = ax.bar(['Before', 'After'], [fom_before, fom_after])
+ax.set_ylabel('FOM')
+ax.set_title('FOM Before and After Cuts for {v}')
+ax.legend()
 
-
-
+plt.tight_layout()  
