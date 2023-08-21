@@ -7,9 +7,9 @@ import pandas as pd
 
 
 # Input PATH
-dir = "/user/j/joaobss/SummerLIP23/ROOT_files/"
-data_file = "Data2018_CompositeVars.root"
-mc_file = "MC_JPSI_2018_CompositeVars.root"
+dir = "/lstore/cms/boletti/ntuples/"
+data_file = "2018Data_passPreselection_passSPlotCuts_mergeSweights.root"
+mc_file = "MC_JPSI_2018_preBDT_Nov21.root"
 
 # Output PATH
 dir_out = "/user/j/joaobss/SummerLIP23/Variables_Plots/"
@@ -27,7 +27,7 @@ mcTree = mc.Get("ntuple")
 
 def sideband_edges():
     # Define the path to the text file
-    file_path = "/user/j/joaobss/SummerLIP23/Fit_Results/B0Fit_3.5sigma_results.txt"
+    file_path = "/user/j/joaobss/SummerLIP23/Fit_Results/B0Fit_JPsi.txt"
 
     # Define the legend labels
     label1 = "left sideband edge"
@@ -130,6 +130,9 @@ def create_histogram(branch,bin,bmin,bmax,blegend,blog):
     elif blog == 0:
         c.SetLogy(0)
 
+    # For Composite Vars
+    branch = branch.replace("/", "_")
+
     c.SaveAs(dir_out + branch + "_histo.png")
 
     # Clear the canvas
@@ -140,7 +143,6 @@ def create_histogram(branch,bin,bmin,bmax,blegend,blog):
 
 
 
-#create_histogram("bVtxCL",100,0,1,"hey",0)
 
 def save_all(file): ## saves all histograms
 
@@ -148,22 +150,15 @@ def save_all(file): ## saves all histograms
     df = pd.read_csv(vars_path)
     df.columns = df.columns.str.strip() # take off leading and trailing spaces
     df["var_name"]=df["var_name"].str.strip()
-    #os.chdir("/user/j/joaobss/SummerLIP23/")
     
     for v in df["var_name"]:
-        composite_value = df.loc[df["var_name"] == v, "composite"].iloc[0]
+        #composite_value = df.loc[df["var_name"] == v, "composite"].iloc[0]
         binv= df.loc[df["var_name"] == v, "bin"].iloc[0]
         minv= df.loc[df["var_name"] == v, "min"].iloc[0]
         maxv= df.loc[df["var_name"] == v, "max"].iloc[0]
         legendv= df.loc[df["var_name"] == v, "legend"].iloc[0]
         logv= df.loc[df["var_name"] == v, "log"].iloc[0]
-        
-        # Careful with the composite vars
-        if composite_value == 1:
-            if v == "(1-bCosAlphaBS)/bCosAlphaBSE":
-                v = "bCosRatio"
-            elif v == "bLBS/bLBSE":
-                v = "bLBSRatio"
+
         
         create_histogram(v,binv,minv,maxv,legendv,logv)
 
@@ -172,7 +167,7 @@ def save_all(file): ## saves all histograms
 
 
 
-save_all("vars.csv")
+save_all("vars_joao.csv")
 
 # Clean up
 data.Close()
