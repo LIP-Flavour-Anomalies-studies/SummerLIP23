@@ -3,6 +3,7 @@ import uproot
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+import utils_fom
 #var="bVtxCL"
 #var="kstTrkmPt"
 #var="bLBS"
@@ -113,41 +114,9 @@ def calc_fom(v,signal,background,minv,maxv,fs,fb):
 
 
 
-
-
-
-
-file=open("/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/Fit results/B0Fit_3.5sigma_results.txt","r")
-
-str1="left sideband edge"
-str2="right sideband edge"
-str3="background scaling factor"
-str4="signal scaling factor "
-
-def get_value(line):
-    value=""
-    
-    for c in line:
-        if c.isdigit() or c==".":
-            value += c
-        else:
-            break
-            
-    return value
-
-
-for line in file:
-    if str1 in line:
-        left_edge=get_value(line)
-    elif str2 in line:
-        right_edge=get_value(line)
-    elif str3 in line:
-        fb=float(get_value(line))
-    elif str4 in line:
-        fs=float(get_value(line))
+left_edge,right_edge,fb,fs=utils_fom.get_factors("/user/u/u23madalenablanc/SummerLIP23/Fit results/B0Fit_3.5sigma_results.txt")
 
 sel="(tagged_mass<" + left_edge+ ") | (tagged_mass>" +right_edge + ")"
-
 
 
 
