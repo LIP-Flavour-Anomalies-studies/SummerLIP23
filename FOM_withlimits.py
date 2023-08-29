@@ -100,9 +100,11 @@ def calc_fom(v,signal,background,minv,maxv,fs,fb,show_upper):
             fom_opposite.append(0)
 
     plt.figure()
-    plt.plot(var_range,fom,label="lower cut")
+    
     if show_upper==1:
         plt.plot(var_range,fom_opposite,label="upper cut")
+    else :
+        plt.plot(var_range,fom,label="lower cut")
     plt.title(f"FOM for: {v}")
     plt.legend()
     while True:
