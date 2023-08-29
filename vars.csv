@@ -1,14 +1,14 @@
-var_name,composite,bin,min,max,legend,log,best_cut
-bLBS,0,100,0,1.2,Flight length (cm),0,0.1
-bLBSE,0,150,0,0.08,Flight length uncertainty (cm),1,0.05
-bLBS/bLBSE,1,100,0,150,Flight length significance,0,20
-bCosAlphaBS,0,100,0.8,1,Cos(#alpha ),1,0.95
-(1-bCosAlphaBS)/bCosAlphaBSE,1,100,0,0.05,Cos(#alpha ) Ratio,1,0.02
-bVtxCL,0,100,0,1,Vertex CL,0,0.35
-kstTrkmDCABS,0,150,-1,1,K* DCA from BS negative track (cm),1,-0.25
-kstTrkpDCABS,0,150,-1,1,K* DCA from BS positive track (cm),1,-0.1
-mu1Pt,0,150,0,50,Leading muon $p_T$ (GeV),0,2.5
-mu2Pt,0,150,0,22,Trailing muon $p_T$ (GeV),0,4
-kstTrkmPt,0,100,0,20,Negative track $p_T$ (GeV),0,1.875
-kstTrkpPt,0,100,0,20,Positive track $p_T$ (GeV),0,1.875
-tagB0,0,10,-0.5,1.5,B-candidate tag,0,0
+var_name,composite,bin,min,max,legend,log,best_cut,show_upper
+bLBS,0,100,0,1.2,Flight length (cm),0,0.1,0
+bLBSE,0,150,0,0.08,Flight length uncertainty (cm),1,0.05,0
+bLBS/bLBSE,1,100,0,150,Flight length significance,0,20,0
+bCosAlphaBS,0,100,0.8,1,Cos(#alpha ),1,0.95,0
+(1-bCosAlphaBS)/bCosAlphaBSE,1,100,0,0.05,Cos(#alpha ) Ratio,1,0.02,0
+bVtxCL,0,100,0,1,Vertex CL,0,0.35,0
+abs(kstTrkmDCABS),1,150,-1,1,K* DCA from BS negative track (cm),1,-0.25,0
+abs(kstTrkpDCABS),1,150,-1,1,K* DCA from BS positive track (cm),1,-0.1,0
+mu1Pt,0,150,0,50,Leading muon $p_T$ (GeV),0,2.5,0
+mu2Pt,0,150,0,22,Trailing muon $p_T$ (GeV),0,4,0
+kstTrkmPt,0,100,0,20,Negative track $p_T$ (GeV),0,1.875,0
+kstTrkpPt,0,100,0,20,Positive track $p_T$ (GeV),0,1.875,0
+tagB0,0,10,-0.5,1.5,B-candidate tag,0,0,0
