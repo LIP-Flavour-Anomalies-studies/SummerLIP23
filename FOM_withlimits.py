@@ -56,7 +56,7 @@ def get_signal_composite(v,sel):
 
 
 
-def calc_fom(v,signal,background,minv,maxv,fs,fb):
+def calc_fom(v,signal,background,minv,maxv,fs,fb,show_upper):
     os.chdir("/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/"+folder)
 
     num_points=100
@@ -101,7 +101,8 @@ def calc_fom(v,signal,background,minv,maxv,fs,fb):
 
     plt.figure()
     plt.plot(var_range,fom,label="lower cut")
-    plt.plot(var_range,fom_opposite,label="upper cut")
+    if show_upper==1:
+        plt.plot(var_range,fom_opposite,label="upper cut")
     plt.title(f"FOM for: {v}")
     plt.legend()
     while True:
@@ -127,9 +128,10 @@ for v in df["var_name"]:
     composite_value = df.loc[df["var_name"] == v, "composite"].iloc[0]
     minv= df.loc[df["var_name"] == v, "min"].iloc[0]
     maxv= df.loc[df["var_name"] == v, "max"].iloc[0]
+    show_upper=df.loc[df["var_name"] == v, "show_upper"].iloc[0]
     print(minv,maxv)
     if composite_value==0:
         signal,back=get_signal_normal(v,sel)
     elif (composite_value)==1:
         signal,back=get_signal_composite(v,sel)
-    calc_fom(v,signal,back,minv,maxv,fs,fb)
+    calc_fom(v,signal,back,minv,maxv,fs,fb,show_upper)
