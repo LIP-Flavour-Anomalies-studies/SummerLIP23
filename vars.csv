@@ -5,8 +5,8 @@ bLBS/bLBSE,1,100,0,150,Flight length significance,0,20,0
 bCosAlphaBS,0,100,0.8,1,Cos(#alpha ),1,0.95,0
 (1-bCosAlphaBS)/bCosAlphaBSE,1,100,0,0.05,Cos(#alpha ) Ratio,1,0.02,0
 bVtxCL,0,100,0,1,Vertex CL,0,0.35,0
-abs(kstTrkmDCABS),1,150,-1,1,K* DCA from BS negative track (cm),1,-0.25,0
-abs(kstTrkpDCABS),1,150,-1,1,K* DCA from BS positive track (cm),1,-0.1,0
+abs(kstTrkmDCABS),1,150,0,1,K* DCA from BS negative track (cm),1,-0.25,0
+abs(kstTrkpDCABS),1,150,0,1,K* DCA from BS positive track (cm),1,-0.1,0
 mu1Pt,0,150,0,50,Leading muon $p_T$ (GeV),0,2.5,0
 mu2Pt,0,150,0,22,Trailing muon $p_T$ (GeV),0,4,0
 kstTrkmPt,0,100,0,20,Negative track $p_T$ (GeV),0,1.875,0
