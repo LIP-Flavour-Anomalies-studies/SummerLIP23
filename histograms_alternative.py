@@ -9,6 +9,7 @@ import awkward.operations as ak
 import sys
 import os
 import pandas as pd
+import utils_fom
 
 
 ##THIS IS THE UPDATED VERSION OF THIS CODE
@@ -39,14 +40,14 @@ Tree=data["ntuple"]
 Tree_mc=data_mc["ntuple"]
 
 
-def get_normal(v):
-    signal=Tree.arrays(v,library="np")
-    background=Tree_mc.arrays(v,library="np")
+def get_normal(v,sel_s,sel_b):
+    background=Tree.arrays(v,cut=sel_b,library="np")
+    signal=Tree_mc.arrays(v,cut=sel_s,library="np")
     return signal,background
 
-def get_composite(v):
-    signal=Tree.arrays(v,aliases={v:v},library="np")
-    background=Tree_mc.arrays(v,aliases={v:v},library="np")
+def get_composite(v,sel_s,sel_b):
+    background=Tree.arrays(v,aliases={v:v},cut=sel_b,library="np")
+    signal=Tree_mc.arrays(v,aliases={v:v},cut=sel_s,library="np")
     return signal,background
 
 
@@ -94,6 +95,10 @@ def hist(v,signal,background, minv,maxv,bins,logscale,legend):
 
 
 def save_all(file,folder): ## saves all histograms in folder
+    left_edge,right_edge,fb,fs=utils_fom.get_factors("/user/u/u23madalenablanc/SummerLIP23/Fit results/B0Fit_3.5sigma_results.txt")
+
+    sel_b="(tagged_mass<" + left_edge+ ") | (tagged_mass>" +right_edge + ")"
+    sel_s="(tagged_mass>" + left_edge+ ") & (tagged_mass<" +right_edge + ")"
 
     variables_path = file #'variables.xlsx'
     df = pd.read_csv(variables_path, header=0)
@@ -111,9 +116,9 @@ def save_all(file,folder): ## saves all histograms in folder
 
         print(f"{v}: composite = {composite_value}")
         if composite_value==0:
-            s,b=get_normal(v)
+            s,b=get_normal(v,sel_s,sel_b)
         elif (composite_value)==1:
-            s,b=get_composite(v)
+            s,b=get_composite(v,sel_s,sel_b)
         hist(v,s,b,minv,maxv,bins,logscale,legend)
 
 

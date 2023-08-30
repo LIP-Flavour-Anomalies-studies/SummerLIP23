@@ -7,7 +7,7 @@ import awkward.operations as ak
 import sys
 import os
 import pandas as pd
-
+import utils_fom
 ##calculate initial and final FOM and final FOM with the cuts applied to the variables
 
 ##plot histogram showing the cut 
@@ -110,35 +110,8 @@ def hist(v,signal,background, minv,maxv,bins,logscale,legend,cut):
             v=v.replace("/", "_div_")
 
     
-#this part will be in a different scipt
 
-file=open("/user/u/u23madalenablanc/SummerLIP23/Fit results/B0Fit_3.5sigma_results.txt","r")
-
-str1="left sideband edge"
-str2="right sideband edge"
-str3="background scaling factor"
-str4="signal scaling factor "
-
-def get_value(line):
-    value=""
-    
-    for c in line:
-        if c.isdigit() or c==".":
-            value += c
-        else:
-            break
-    return value
-
-
-for line in file:
-    if str1 in line:
-        left_edge=get_value(line)
-    elif str2 in line:
-        right_edge=get_value(line)
-    elif str3 in line:
-        fb=float(get_value(line))
-    elif str4 in line:
-        fs=float(get_value(line))
+left_edge,right_edge,fb,fs=utils_fom.get_factors("/user/u/u23madalenablanc/SummerLIP23/Fit results/B0Fit_3.5sigma_results.txt")
 
 #this is for background
 sel_tagged_mass_b="(tagged_mass<" + left_edge+ ") | (tagged_mass>" +right_edge + ")"
@@ -167,63 +140,92 @@ for v,cut in cuts_dict.items():
 
 print(selection_s)
 
-
-fom_dict={}
-for v in df["var_name"]:  
-    print(v)
-    composite_value = df.loc[df["var_name"] == v, "composite"].iloc[0]
-    minv= df.loc[df["var_name"] == v, "min"].iloc[0]
-    maxv= df.loc[df["var_name"] == v, "max"].iloc[0]
-    bins=df.loc[df["var_name"] == v, "bin"].iloc[0]
-    logscale=df.loc[df["var_name"] == v, "log"].iloc[0]
-    legend=df.loc[df["var_name"] == v, "legend"].iloc[0]
-    cut=df.loc[df["var_name"] == v, "best_cut"].iloc[0]
-    #print(minv,maxv)
-    if composite_value==0:
-        s,b=get_signal_normal(v,sel_tagged_mass_s,sel_tagged_mass_b)
-    elif (composite_value)==1:
-        s,b=get_signal_composite(v,sel_tagged_mass_s,sel_tagged_mass_b)
-    fom_before=calc_fom(v,s,b,minv,maxv,minv)
-    print(fom_before)
-
-    if composite_value==0:
-        new_s,new_b=get_signal_normal(v,selection_s,selection_b)
-    elif (composite_value)==1:
-        new_s,new_b=get_signal_composite(v,selection_s,selection_b)
-    fom_after=calc_fom(v,new_s,new_b,minv,maxv,minv)
-    print(fom_after)
-
-    fom_dict[v]=[fom_before,fom_after]
-
-    if composite_value==0:
-        signal,background=get_signal_normal(v,None,None)
-    elif (composite_value)==1:
-        signal,background=get_signal_composite(v,None,None)
+def parse_all(df):
+    fom_dict={}
     
+    for v in df["var_name"]:  
+        print(v)
+        composite_value = df.loc[df["var_name"] == v, "composite"].iloc[0]
+        minv= df.loc[df["var_name"] == v, "min"].iloc[0]
+        maxv= df.loc[df["var_name"] == v, "max"].iloc[0]
+        bins=df.loc[df["var_name"] == v, "bin"].iloc[0]
+        logscale=df.loc[df["var_name"] == v, "log"].iloc[0]
+        legend=df.loc[df["var_name"] == v, "legend"].iloc[0]
+        cut=df.loc[df["var_name"] == v, "best_cut"].iloc[0]
 
-    hist(v,signal,background, minv,maxv,bins,logscale,legend,cut)
+        cut_b=selection_b+" | (" + v + "<" +str(cut) + ")"
+        cut_s=selection_s+" & (" + v + ">" +str(cut) + ")"
+        #print(minv,maxv)
+        if composite_value==0:
+            s,b=get_signal_normal(v,sel_tagged_mass_s,cut_b)
+        elif (composite_value)==1:
+            s,b=get_signal_composite(v,sel_tagged_mass_s,sel_tagged_mass_b)
+        fom_before=calc_fom(v,s,b,minv,maxv,cut)
+        print(fom_before)
+
+        if composite_value==0:
+            new_s,new_b=get_signal_normal(v,sel_tagged_mass_s,sel_tagged_mass_b)
+        elif (composite_value)==1:
+            new_s,new_b=get_signal_composite(v,sel_tagged_mass_s,sel_tagged_mass_b)
+
+        fom_after=calc_fom(v,new_s,new_b,minv,maxv,cut)
+        print(fom_after)
+
+        fom_dict[v]=[fom_before,fom_after]
+
+        if composite_value==0:
+            signal,background=get_signal_normal(v,None,None)
+        elif (composite_value)==1:
+            signal,background=get_signal_composite(v,None,None)
+        
+
+        hist(v,signal,background, minv,maxv,bins,logscale,legend,cut)
+
+        fig, ax = plt.subplots()
+
+        # Create side-by-side bar plot for the current variable
+        bars_before = ax.bar(['Before', 'After'], [fom_before, fom_after])
+
+        # Add labels, title, and legend
+        ax.set_ylabel('FOM')
+        ax.set_title('FOM Before and After Cuts for {v}')
+        ax.legend()
+
+        plt.tight_layout()    
+
+        while True:
+            try:
+                plt.savefig(v+'_compar.png')
+                break
+            except FileNotFoundError:
+                print("bad name")
+                v=v.replace("/", "_div_")
+
+
+    # Create a single grouped bar plot
+    x = np.arange(len(df["var_name"]))  # x-axis positions for variables
+    width = 0.35  # Width of each bar
 
     fig, ax = plt.subplots()
 
-    # Create side-by-side bar plot for the current variable
-    bars_before = ax.bar(['Before', 'After'], [fom_before, fom_after])
 
-    # Add labels, title, and legend
+    for idx, v in enumerate(df["var_name"]):
+        fom_values = fom_dict.get(v, [0, 0])  # Default to [0, 0] if v not found
+        bars_before = ax.bar(x[idx], fom_values[0], width, label=f'Before {v}', color='blue')
+        bars_after = ax.bar(x[idx] + width, fom_values[1], width, label=f'After {v}', color='orange')
+
+    # Add labels, title, and remove legend
     ax.set_ylabel('FOM')
-    ax.set_title(f'FOM Before and After Cuts for {v}')
-    ax.legend()
+    ax.set_title('FOM Before and After Cuts by Variable')
+    ax.set_xticks(x + width / 2)
+    ax.set_xticklabels(df["var_name"], rotation=45, ha="right")
+    ax.set_yscale('log')  # Set y-axis to logarithmic scale
+    ax.legend().set_visible(False)  # Remove the legend
 
-    plt.tight_layout()    
+    plt.tight_layout()
 
-    while True:
-        try:
-            plt.savefig(v+'_compar.png')
-            break
-        except FileNotFoundError:
-            print("bad name")
-            v=v.replace("/", "_div_")
-
-#bar plot to compare results
+    plt.savefig("compar.png")
 
 
+#parse_all(df)
 

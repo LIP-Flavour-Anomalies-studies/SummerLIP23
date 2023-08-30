@@ -3,6 +3,7 @@ import uproot
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+import utils_fom
 #var="bVtxCL"
 #var="kstTrkmPt"
 #var="bLBS"
@@ -55,7 +56,7 @@ def get_signal_composite(v,sel):
 
 
 
-def calc_fom(v,signal,background,minv,maxv,fs,fb):
+def calc_fom(v,signal,background,minv,maxv,fs,fb,show_upper):
     os.chdir("/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/"+folder)
 
     num_points=100
@@ -99,8 +100,11 @@ def calc_fom(v,signal,background,minv,maxv,fs,fb):
             fom_opposite.append(0)
 
     plt.figure()
-    plt.plot(var_range,fom,label="lower cut")
-    plt.plot(var_range,fom_opposite,label="upper cut")
+    
+    if show_upper==1:
+        plt.plot(var_range,fom_opposite,label="upper cut")
+    else :
+        plt.plot(var_range,fom,label="lower cut")
     plt.title(f"FOM for: {v}")
     plt.legend()
     while True:
@@ -113,41 +117,9 @@ def calc_fom(v,signal,background,minv,maxv,fs,fb):
 
 
 
-
-
-
-
-file=open("/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/Fit results/B0Fit_3.5sigma_results.txt","r")
-
-str1="left sideband edge"
-str2="right sideband edge"
-str3="background scaling factor"
-str4="signal scaling factor "
-
-def get_value(line):
-    value=""
-    
-    for c in line:
-        if c.isdigit() or c==".":
-            value += c
-        else:
-            break
-            
-    return value
-
-
-for line in file:
-    if str1 in line:
-        left_edge=get_value(line)
-    elif str2 in line:
-        right_edge=get_value(line)
-    elif str3 in line:
-        fb=float(get_value(line))
-    elif str4 in line:
-        fs=float(get_value(line))
+left_edge,right_edge,fb,fs=utils_fom.get_factors("/user/u/u23madalenablanc/SummerLIP23/Fit results/B0Fit_3.5sigma_results.txt")
 
 sel="(tagged_mass<" + left_edge+ ") | (tagged_mass>" +right_edge + ")"
-
 
 
 
@@ -158,9 +130,10 @@ for v in df["var_name"]:
     composite_value = df.loc[df["var_name"] == v, "composite"].iloc[0]
     minv= df.loc[df["var_name"] == v, "min"].iloc[0]
     maxv= df.loc[df["var_name"] == v, "max"].iloc[0]
+    show_upper=df.loc[df["var_name"] == v, "show_upper"].iloc[0]
     print(minv,maxv)
     if composite_value==0:
         signal,back=get_signal_normal(v,sel)
     elif (composite_value)==1:
         signal,back=get_signal_composite(v,sel)
-    calc_fom(v,signal,back,minv,maxv,fs,fb)
+    calc_fom(v,signal,back,minv,maxv,fs,fb,show_upper)
