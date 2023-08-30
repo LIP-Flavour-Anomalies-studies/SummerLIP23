@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 
 #Input PATH
-dir = "/user/j/joaobss/SummerLIP23/ROOT_files/"
+dir = "/user/j/joaobss/LIP-Intership23/ROOT_files/"
 data_file = "Data2018_CompositeVars.root"
 mc_file = "MC_JPSI_2018_CompositeVars.root"
 
@@ -21,7 +21,7 @@ mcTree = file2.Get("ntuple")
 
 
 # Access .csv file
-vars_path = "/user/j/joaobss/SummerLIP23/vars.csv" #'vars.csv'
+vars_path = "/user/j/joaobss/SummerLIP23/vars_joao.csv" #'vars.csv'
 df = pd.read_csv(vars_path)
 df.columns = df.columns.str.strip() # take off leading and trailing spaces
 df["var_name"]=df["var_name"].str.strip()
@@ -45,7 +45,7 @@ for v in df["var_name"]:
 
 def sideband_edges():
     # Define the path to the text file
-    file_path = "/user/j/joaobss/SummerLIP23/Fit_Results/B0Fit_3.5sigma_results.txt"
+    file_path = "/user/j/joaobss/SummerLIP23/Fit_Results/B0Fit_JPsi.txt"
 
     # Define the legend labels
     label1 = "left sideband edge"
