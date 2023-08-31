@@ -111,7 +111,7 @@ def hist(v,signal,background, minv,maxv,bins,logscale,legend,cut):
 
     
 
-left_edge,right_edge,fb,fs=utils_fom.get_factors("/user/u/u23madalenablanc/SummerLIP23/Fit results/B0Fit_3.5sigma_results.txt")
+left_edge,right_edge,fb,fs=utils_fom.get_factors("/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/Fit_Results/B0Fit_3.5sigma_results.txt")
 
 #this is for background
 sel_tagged_mass_b="(tagged_mass<" + left_edge+ ") | (tagged_mass>" +right_edge + ")"
