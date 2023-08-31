@@ -44,20 +44,20 @@ df.columns = df.columns.str.strip()
 
 
 
-def get_signal_normal(v,sel):
-    background=Tree.arrays(v,cut=sel,library="pd")
-    signal=Tree_mc.arrays(v,cut=sel,library="pd")
+def get_signal_normal(v,sel_s,sel_b):
+    background=Tree.arrays(v,cut=sel_b,library="pd")
+    signal=Tree_mc.arrays(v,cut=sel_s,library="pd")
     return signal,background
 
-def get_signal_composite(v,sel):
-    signal=Tree_mc.arrays(v,aliases={v:v},cut=sel,library="pd")
-    background=Tree.arrays(v,aliases={v:v},cut=sel,library="pd")
+def get_signal_composite(v,sel_s,sel_b):
+    signal=Tree_mc.arrays(v,aliases={v:v},cut=sel_s,library="pd")
+    background=Tree.arrays(v,aliases={v:v},cut=sel_b,library="pd")
     return signal,background
 
 
 
 def calc_fom(v,signal,background,minv,maxv,fs,fb,show_upper,legend):
-    os.chdir("/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/"+folder)
+    #os.chdir("/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/"+folder)
 
     num_points=100
 
@@ -131,9 +131,10 @@ def calc_fom(v,signal,background,minv,maxv,fs,fb,show_upper,legend):
 
 
 
-left_edge,right_edge,fb,fs=utils_fom.get_factors("/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/Fit results/B0Fit_3.5sigma_results.txt")
+left_edge,right_edge,fb,fs=utils_fom.get_factors("/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/Fit_Results/B0Fit_3.5sigma_results.txt")
 
-sel="(tagged_mass<" + left_edge+ ") | (tagged_mass>" +right_edge + ")"
+sel_b="(tagged_mass<" + left_edge+ ") | (tagged_mass>" +right_edge + ")"
+sel_s="(tagged_mass>" + left_edge+ ") & (tagged_mass<" +right_edge + ")"
 
 
 
@@ -148,7 +149,7 @@ for v in df["var_name"]:
     legend=df.loc[df["var_name"] == v, "legend"].iloc[0]
     print(minv,maxv)
     if composite_value==0:
-        signal,back=get_signal_normal(v,sel)
+        signal,back=get_signal_normal(v,sel_s,sel_b)
     elif (composite_value)==1:
-        signal,back=get_signal_composite(v,sel)
+        signal,back=get_signal_composite(v,sel_s,sel_b)
     calc_fom(v,signal,back,minv,maxv,fs,fb,show_upper,legend)

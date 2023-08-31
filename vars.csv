@@ -9,6 +9,4 @@ abs(kstTrkmDCABS),1,150,0,1,K* DCA from BS negative track (cm),1,-0.25,0
 abs(kstTrkpDCABS),1,150,0,1,K* DCA from BS positive track (cm),1,-0.1,0
 mu1Pt,0,150,0,50,Leading muon $p_T$ (GeV),0,2.5,0
 mu2Pt,0,150,0,22,Trailing muon $p_T$ (GeV),0,4,0
-kstTrkmPt,0,100,0,20,Negative track $p_T$ (GeV),0,1.875,0
-kstTrkpPt,0,100,0,20,Positive track $p_T$ (GeV),0,1.875,0
 tagB0,0,10,-0.5,1.5,B-candidate tag,0,0,0
