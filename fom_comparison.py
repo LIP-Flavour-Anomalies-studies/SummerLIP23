@@ -227,5 +227,5 @@ def parse_all(df):
     plt.savefig("compar.png")
 
 
-#parse_all(df)
+parse_all(df)
 
