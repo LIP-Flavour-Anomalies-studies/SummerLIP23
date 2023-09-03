@@ -1,0 +1,35 @@
+# Training / Test splits & signal/bkg weights
+#regarding the dataset dirs and corresponding BDT logs
+
+(A) Random features                   1-used All                       2-removed kstTrk(+)     
+dataset 1-2 (80/20 split)             3-removed DCA                    4-removed DCA, tagB0     
+dataset 3-8 (70/30 split)             5-removed cosAlpha, mu2, tagB0   6-removed Pts, cosAlpha         
+signalWeight     = 1.0                7-removed bLBS, bVtxCL           8-removed bLBS, bVtxCL, kstarPts
+backgroundWeight = 1.0
+
+(B) Random features
+dataset 9-16 (70/30 split)
+#signalWeight     = 0.6774
+#backgroundWeight = 0.8138
+
+(C) Removed the input features one by one to test their influence in the BDT score
+Best features: bLBS, bVtxCL, kstTrkmPt, kstTrkpPt, tagB0
+Worst features: bCosAlphaBS, kstTrkmDCABS, kstTrkpDCABS, mu1Pt, mu2Pt
+dataset 01-010 (80/20 split)
+signalWeight = 1.0
+backgroundWeight = 1.0
+
+(D) Afterwards removed the worst input features of step C
+Result: The best score was the one that contained more input features
+dataset 100-101 (70/30 split)
+signalWeight = 1.0
+backgroundWeight = 1.0
+
+(E)
+Norm1 80/20
+Norm1A 60/40
+Norm1B 50/50
+Norm1C 70/30
+
+(Final)
+Chosen dataset: Norm1C with 70/30 split; 250 trees, 2.5% nodeSize, 5 depth, 30 cuts
