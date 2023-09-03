@@ -43,9 +43,9 @@ for v in df["var_name"]:
 
 
 
-def sideband_edges():
+def sideband_edges(fit_text_file):
     # Define the path to the text file
-    file_path = "/user/j/joaobss/SummerLIP23/Fit_Results/B0Fit_JPsi.txt"
+    file_path = "/user/j/joaobss/SummerLIP23/Fit_Results/" + fit_text_file
 
     # Define the legend labels
     label1 = "left sideband edge"
@@ -78,7 +78,7 @@ def sideband_edges():
 def correlation_matrix(data_type):
 
     # Get the left and right sideband edges
-    sleft, sright = sideband_edges()
+    sleft, sright = sideband_edges("B0Fit_JPsi.txt")
 
     data = {var: [] for var in variables}
 
