@@ -55,8 +55,8 @@ def hist(v,signal,background, minv,maxv,bins,logscale,legend):
 
     plt.figure()
     
-    data_hist, data_bin_edges = np.histogram(signal[v], bins=bins, range=(minv,maxv))
-    mc_hist, mc_bin_edges = np.histogram(background[v], bins=bins, range=(minv,maxv))
+    data_hist, data_bin_edges = np.histogram(background[v], bins=bins, range=(minv,maxv))
+    mc_hist, mc_bin_edges = np.histogram(signal[v], bins=bins, range=(minv,maxv))
 
     data_bin_centers = (data_bin_edges[:-1] + data_bin_edges[1:]) / 2
     mc_bin_centers = (mc_bin_edges[:-1] + mc_bin_edges[1:]) / 2
