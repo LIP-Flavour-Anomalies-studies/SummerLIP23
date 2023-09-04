@@ -18,7 +18,7 @@ testTree = directory["TestTree"]
 classID_branch = testTree["classID"].array(library="pd")
 BDTscore_branch = testTree["BDTs"].array(library="pd")
 
-#signal and background scores separated
+#signal and background BDT scores
 signal = BDTscore_branch[classID_branch==0]
 background = BDTscore_branch[classID_branch==1]
 
@@ -45,7 +45,7 @@ def calc_fom(signal,background,minv,maxv,fs,fb,show_upper=0):
         b = np.sum(background > i)
         b=b*fb
 
-
+        #Not used in this var: BDT score
         s_opposite=np.sum(signal<i)
         s_opposite*=fs
         b_opposite = np.sum(background < i)
@@ -55,6 +55,8 @@ def calc_fom(signal,background,minv,maxv,fs,fb,show_upper=0):
         f=s/(s+b)**0.5
         fom.append(f)
 
+
+        #Not used in this var: BDT score
         if (s_opposite>0 or b_opposite>0):
             fom_opposite.append(s_opposite/(s_opposite+b_opposite)**0.5)
         else:
@@ -72,10 +74,14 @@ def calc_fom(signal,background,minv,maxv,fs,fb,show_upper=0):
 
     print(f"Best cut: BDT score={max_x}, FOM={max_y}")
 
+    f = open("/user/j/joaobss/SummerLIP23/dataset_norm1C/plots/BDT_fom.txt", "w")
+    f.write(f"Best cut: \nBDT score = {max_x}, \nFOM = {max_y}")
+    f.close()
 
-    if show_upper==1:
-        label="upper cut"
-        fom_to_plot=fom_opposite
+
+    if show_upper==1:               #Not used in this var: BDT score
+        label="upper cut"           #Not used in this var: BDT score
+        fom_to_plot=fom_opposite    #Not used in this var: BDT score
     else:
         label="lower cut"
         fom_to_plot=fom
@@ -91,8 +97,9 @@ def calc_fom(signal,background,minv,maxv,fs,fb,show_upper=0):
 
     
     plt.savefig("/user/j/joaobss/SummerLIP23/dataset_norm1C/plots/BDT_fom.png")
-      
 
+
+    
 
 
 #get the scale factors
@@ -101,13 +108,6 @@ _, _ , fb, fs = utils_fom.get_factors("/user/j/joaobss/SummerLIP23/Fit_Results/B
 
 #calculate the BDT FOM
 calc_fom(signal,background,minv,maxv,fs,fb)
-
-
-
-
-#print(minv)
-#print(maxv)
-
 
 
 file.close()
