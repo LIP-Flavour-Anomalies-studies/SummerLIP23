@@ -106,6 +106,7 @@ def main():
 
     x,y = utils.prepdata(data,data_mc) 
     dataset = utils.ClassificationDataset(x,y)
+    #print(dataset)
     train_set,test_set,val_set =torch.utils.data.random_split(dataset, [0.5,0.25,0.25])
     train_dataloader = torch.utils.data.DataLoader(train_set, batch_size=opt.batch_size, shuffle=True)
 
