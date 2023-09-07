@@ -1,4 +1,0 @@
-5.135291720787397  #left sideband edge
-5.41526386742722  #right sideband edge
-732458.7285575159  #signal yield
-628618.7366601618  #background yield
