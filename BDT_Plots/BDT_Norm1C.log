@@ -1,0 +1,367 @@
+DataSetInfo              : [dataset_norm1C] : Added class "Signal"
+                         : Add Tree ntuple of type Signal with 2666715 events
+DataSetInfo              : [dataset_norm1C] : Added class "Background"
+                         : Add Tree ntuple of type Background with 3326999 events
+Factory                  : Booking method: [1mBDTs[0m
+                         : 
+BDTs                     : [dataset_norm1C] : Create Transformation "Decorrelate" with events from all classes.
+                         : 
+                         : Transformation, Variable selection : 
+                         : Input : variable 'bLBS' <---> Output : variable 'bLBS'
+                         : Input : variable 'bCosAlphaBS' <---> Output : variable 'bCosAlphaBS'
+                         : Input : variable 'bVtxCL' <---> Output : variable 'bVtxCL'
+                         : Input : variable 'kstTrkmDCABS' <---> Output : variable 'kstTrkmDCABS'
+                         : Input : variable 'kstTrkpDCABS' <---> Output : variable 'kstTrkpDCABS'
+                         : Input : variable 'mu1Pt' <---> Output : variable 'mu1Pt'
+                         : Input : variable 'mu2Pt' <---> Output : variable 'mu2Pt'
+                         : Input : variable 'kstTrkmPt' <---> Output : variable 'kstTrkmPt'
+                         : Input : variable 'kstTrkpPt' <---> Output : variable 'kstTrkpPt'
+                         : Input : variable 'tagB0' <---> Output : variable 'tagB0'
+DataSetFactory           : [dataset_norm1C] : Number of events in input trees
+                         : Dataset[dataset_norm1C] :     Signal     requirement: "tagged_mass > 5.134111 && tagged_mass < 5.416179"
+                         : Dataset[dataset_norm1C] :     Signal          -- number of events passed: 2429692  / sum of weights: 2.42969e+06
+                         : Dataset[dataset_norm1C] :     Signal          -- efficiency             : 0.911118
+                         : Dataset[dataset_norm1C] :     Background requirement: "tagged_mass < 5.134111 || tagged_mass > 5.416179"
+                         : Dataset[dataset_norm1C] :     Background      -- number of events passed: 845785  / sum of weights: 845785
+                         : Dataset[dataset_norm1C] :     Background      -- efficiency             : 0.254219
+                         : Dataset[dataset_norm1C] :  you have opted for interpreting the requested number of training/testing events
+                         :  to be the number of events AFTER your preselection cuts
+                         : 
+                         : Dataset[dataset_norm1C] :  you have opted for interpreting the requested number of training/testing events
+                         :  to be the number of events AFTER your preselection cuts
+                         : 
+                         : Number of training and testing events
+                         : ---------------------------------------------------------------------------
+                         : Signal     -- training events            : 1700784
+                         : Signal     -- testing events             : 728908
+                         : Signal     -- training and testing events: 2429692
+                         : Dataset[dataset_norm1C] : Signal     -- due to the preselection a scaling factor has been applied to the numbers of requested events: 0.911118
+                         : Background -- training events            : 592049
+                         : Background -- testing events             : 253736
+                         : Background -- training and testing events: 845785
+                         : Dataset[dataset_norm1C] : Background -- due to the preselection a scaling factor has been applied to the numbers of requested events: 0.254219
+                         : 
+DataSetInfo              : Correlation matrix (Signal):
+                         : ---------------------------------------------------------------------------------------------------------------
+                         :                  bLBS bCosAlphaBS  bVtxCL kstTrkmDCABS kstTrkpDCABS   mu1Pt   mu2Pt kstTrkmPt kstTrkpPt   tagB0
+                         :         bLBS:  +1.000      +0.146  -0.008       -0.021       -0.005  +0.374  +0.305    +0.278    +0.281  +0.002
+                         :  bCosAlphaBS:  +0.146      +1.000  +0.037       -0.001       -0.001  +0.087  +0.074    +0.064    +0.064  -0.000
+                         :       bVtxCL:  -0.008      +0.037  +1.000       -0.002       -0.001  -0.016  -0.013    -0.025    -0.026  -0.001
+                         : kstTrkmDCABS:  -0.021      -0.001  -0.002       +1.000       +0.574  -0.002  -0.001    +0.003    -0.002  -0.003
+                         : kstTrkpDCABS:  -0.005      -0.001  -0.001       +0.574       +1.000  +0.003  +0.002    +0.003    -0.001  -0.002
+                         :        mu1Pt:  +0.374      +0.087  -0.016       -0.002       +0.003  +1.000  +0.570    +0.267    +0.264  -0.001
+                         :        mu2Pt:  +0.305      +0.074  -0.013       -0.001       +0.002  +0.570  +1.000    +0.195    +0.194  -0.001
+                         :    kstTrkmPt:  +0.278      +0.064  -0.025       +0.003       +0.003  +0.267  +0.195    +1.000    +0.274  -0.207
+                         :    kstTrkpPt:  +0.281      +0.064  -0.026       -0.002       -0.001  +0.264  +0.194    +0.274    +1.000  +0.207
+                         :        tagB0:  +0.002      -0.000  -0.001       -0.003       -0.002  -0.001  -0.001    -0.207    +0.207  +1.000
+                         : ---------------------------------------------------------------------------------------------------------------
+DataSetInfo              : Correlation matrix (Background):
+                         : ---------------------------------------------------------------------------------------------------------------
+                         :                  bLBS bCosAlphaBS  bVtxCL kstTrkmDCABS kstTrkpDCABS   mu1Pt   mu2Pt kstTrkmPt kstTrkpPt   tagB0
+                         :         bLBS:  +1.000      +0.088  +0.132       -0.012       +0.005  +0.381  +0.321    +0.238    +0.245  -0.000
+                         :  bCosAlphaBS:  +0.088      +1.000  +0.079       -0.001       -0.000  +0.063  +0.054    +0.045    +0.045  -0.005
+                         :       bVtxCL:  +0.132      +0.079  +1.000       +0.008       -0.009  +0.030  +0.029    +0.059    +0.061  +0.002
+                         : kstTrkmDCABS:  -0.012      -0.001  +0.008       +1.000       +0.143  -0.005  -0.003    +0.007    -0.000  -0.001
+                         : kstTrkpDCABS:  +0.005      -0.000  -0.009       +0.143       +1.000  +0.001  +0.002    -0.000    -0.008  +0.001
+                         :        mu1Pt:  +0.381      +0.063  +0.030       -0.005       +0.001  +1.000  +0.583    +0.182    +0.185  -0.001
+                         :        mu2Pt:  +0.321      +0.054  +0.029       -0.003       +0.002  +0.583  +1.000    +0.133    +0.133  -0.001
+                         :    kstTrkmPt:  +0.238      +0.045  +0.059       +0.007       -0.000  +0.182  +0.133    +1.000    +0.250  -0.181
+                         :    kstTrkpPt:  +0.245      +0.045  +0.061       -0.000       -0.008  +0.185  +0.133    +0.250    +1.000  +0.185
+                         :        tagB0:  -0.000      -0.005  +0.002       -0.001       +0.001  -0.001  -0.001    -0.181    +0.185  +1.000
+                         : ---------------------------------------------------------------------------------------------------------------
+DataSetFactory           : [dataset_norm1C] :  
+                         : 
+Factory                  : [1mTrain all methods[0m
+Factory                  : [dataset_norm1C] : Create Transformation "I" with events from all classes.
+                         : 
+                         : Transformation, Variable selection : 
+                         : Input : variable 'bLBS' <---> Output : variable 'bLBS'
+                         : Input : variable 'bCosAlphaBS' <---> Output : variable 'bCosAlphaBS'
+                         : Input : variable 'bVtxCL' <---> Output : variable 'bVtxCL'
+                         : Input : variable 'kstTrkmDCABS' <---> Output : variable 'kstTrkmDCABS'
+                         : Input : variable 'kstTrkpDCABS' <---> Output : variable 'kstTrkpDCABS'
+                         : Input : variable 'mu1Pt' <---> Output : variable 'mu1Pt'
+                         : Input : variable 'mu2Pt' <---> Output : variable 'mu2Pt'
+                         : Input : variable 'kstTrkmPt' <---> Output : variable 'kstTrkmPt'
+                         : Input : variable 'kstTrkpPt' <---> Output : variable 'kstTrkpPt'
+                         : Input : variable 'tagB0' <---> Output : variable 'tagB0'
+Factory                  : [dataset_norm1C] : Create Transformation "D" with events from all classes.
+                         : 
+                         : Transformation, Variable selection : 
+                         : Input : variable 'bLBS' <---> Output : variable 'bLBS'
+                         : Input : variable 'bCosAlphaBS' <---> Output : variable 'bCosAlphaBS'
+                         : Input : variable 'bVtxCL' <---> Output : variable 'bVtxCL'
+                         : Input : variable 'kstTrkmDCABS' <---> Output : variable 'kstTrkmDCABS'
+                         : Input : variable 'kstTrkpDCABS' <---> Output : variable 'kstTrkpDCABS'
+                         : Input : variable 'mu1Pt' <---> Output : variable 'mu1Pt'
+                         : Input : variable 'mu2Pt' <---> Output : variable 'mu2Pt'
+                         : Input : variable 'kstTrkmPt' <---> Output : variable 'kstTrkmPt'
+                         : Input : variable 'kstTrkpPt' <---> Output : variable 'kstTrkpPt'
+                         : Input : variable 'tagB0' <---> Output : variable 'tagB0'
+Factory                  : [dataset_norm1C] : Create Transformation "P" with events from all classes.
+                         : 
+                         : Transformation, Variable selection : 
+                         : Input : variable 'bLBS' <---> Output : variable 'bLBS'
+                         : Input : variable 'bCosAlphaBS' <---> Output : variable 'bCosAlphaBS'
+                         : Input : variable 'bVtxCL' <---> Output : variable 'bVtxCL'
+                         : Input : variable 'kstTrkmDCABS' <---> Output : variable 'kstTrkmDCABS'
+                         : Input : variable 'kstTrkpDCABS' <---> Output : variable 'kstTrkpDCABS'
+                         : Input : variable 'mu1Pt' <---> Output : variable 'mu1Pt'
+                         : Input : variable 'mu2Pt' <---> Output : variable 'mu2Pt'
+                         : Input : variable 'kstTrkmPt' <---> Output : variable 'kstTrkmPt'
+                         : Input : variable 'kstTrkpPt' <---> Output : variable 'kstTrkpPt'
+                         : Input : variable 'tagB0' <---> Output : variable 'tagB0'
+Factory                  : [dataset_norm1C] : Create Transformation "G" with events from all classes.
+                         : 
+                         : Transformation, Variable selection : 
+                         : Input : variable 'bLBS' <---> Output : variable 'bLBS'
+                         : Input : variable 'bCosAlphaBS' <---> Output : variable 'bCosAlphaBS'
+                         : Input : variable 'bVtxCL' <---> Output : variable 'bVtxCL'
+                         : Input : variable 'kstTrkmDCABS' <---> Output : variable 'kstTrkmDCABS'
+                         : Input : variable 'kstTrkpDCABS' <---> Output : variable 'kstTrkpDCABS'
+                         : Input : variable 'mu1Pt' <---> Output : variable 'mu1Pt'
+                         : Input : variable 'mu2Pt' <---> Output : variable 'mu2Pt'
+                         : Input : variable 'kstTrkmPt' <---> Output : variable 'kstTrkmPt'
+                         : Input : variable 'kstTrkpPt' <---> Output : variable 'kstTrkpPt'
+                         : Input : variable 'tagB0' <---> Output : variable 'tagB0'
+Factory                  : [dataset_norm1C] : Create Transformation "D" with events from all classes.
+                         : 
+                         : Transformation, Variable selection : 
+                         : Input : variable 'bLBS' <---> Output : variable 'bLBS'
+                         : Input : variable 'bCosAlphaBS' <---> Output : variable 'bCosAlphaBS'
+                         : Input : variable 'bVtxCL' <---> Output : variable 'bVtxCL'
+                         : Input : variable 'kstTrkmDCABS' <---> Output : variable 'kstTrkmDCABS'
+                         : Input : variable 'kstTrkpDCABS' <---> Output : variable 'kstTrkpDCABS'
+                         : Input : variable 'mu1Pt' <---> Output : variable 'mu1Pt'
+                         : Input : variable 'mu2Pt' <---> Output : variable 'mu2Pt'
+                         : Input : variable 'kstTrkmPt' <---> Output : variable 'kstTrkmPt'
+                         : Input : variable 'kstTrkpPt' <---> Output : variable 'kstTrkpPt'
+                         : Input : variable 'tagB0' <---> Output : variable 'tagB0'
+TFHandler_Factory        :     Variable            Mean            RMS    [        Min            Max ]
+                         : -------------------------------------------------------------------------------
+                         :         bLBS:       0.26195       0.26023   [     0.0022894        9.1211 ]
+                         :  bCosAlphaBS:       0.99969     0.0035216   [      -0.39007        1.0000 ]
+                         :       bVtxCL:       0.51223       0.30760   [      0.010000        1.0000 ]
+                         : kstTrkmDCABS:   -0.00083521      0.083952   [       -3.6889        23.464 ]
+                         : kstTrkpDCABS:    0.00025181      0.084290   [       -20.398        3.5041 ]
+                         :        mu1Pt:        11.335        7.1373   [        4.0077        228.10 ]
+                         :        mu2Pt:        6.6478        2.9889   [        4.0000        142.20 ]
+                         :    kstTrkmPt:        3.6348        3.5453   [       0.80000        135.62 ]
+                         :    kstTrkpPt:        3.6353        3.5487   [       0.80000        139.38 ]
+                         :        tagB0:       0.50050       0.50000   [        0.0000        1.0000 ]
+                         : -------------------------------------------------------------------------------
+                         : Preparing the Decorrelation transformation...
+TFHandler_Factory        :     Variable            Mean            RMS    [        Min            Max ]
+                         : -------------------------------------------------------------------------------
+                         :         bLBS:      -0.13356        1.0000   [       -11.932        27.324 ]
+                         :  bCosAlphaBS:        284.97        1.0000   [       -111.31        285.28 ]
+                         :       bVtxCL:        1.4712        1.0000   [      -0.58080        3.5244 ]
+                         : kstTrkmDCABS:     -0.023634        1.0000   [       -46.487        294.09 ]
+                         : kstTrkpDCABS:      0.021682        1.0000   [       -254.28        43.694 ]
+                         :        mu1Pt:        1.1937        1.0000   [      0.021623        33.349 ]
+                         :        mu2Pt:        1.8137        1.0000   [       -12.820        40.874 ]
+                         :    kstTrkmPt:       0.71007        1.0000   [       -6.1274        39.016 ]
+                         :    kstTrkpPt:       0.63890        1.0000   [       -6.3183        38.084 ]
+                         :        tagB0:        1.0671        1.0000   [       -7.2684        9.2398 ]
+                         : -------------------------------------------------------------------------------
+                         : Preparing the Principle Component (PCA) transformation...
+TFHandler_Factory        :     Variable            Mean            RMS    [        Min            Max ]
+                         : -------------------------------------------------------------------------------
+                         :         bLBS:   -1.3859e-10        7.5002   [       -246.57        8.3342 ]
+                         :  bCosAlphaBS:   -1.9002e-11        3.7499   [       -38.866        101.79 ]
+                         :       bVtxCL:    4.7604e-11        3.0258   [       -91.886        93.009 ]
+                         : kstTrkmDCABS:    1.8029e-11        2.3685   [       -74.567        53.094 ]
+                         : kstTrkpDCABS:    2.8348e-13       0.47088   [       -4.7489        4.6573 ]
+                         :        mu1Pt:    5.3448e-12       0.30793   [      -0.70289       0.82007 ]
+                         :        mu2Pt:    4.1349e-12       0.23106   [       -2.9030        6.2568 ]
+                         :    kstTrkmPt:   -1.6490e-12      0.097819   [       -16.432        14.542 ]
+                         :    kstTrkpPt:   -1.1633e-12      0.067681   [       -16.751        2.7071 ]
+                         :        tagB0:    2.4195e-14     0.0035054   [       -1.3891     0.0010896 ]
+                         : -------------------------------------------------------------------------------
+                         : Preparing the Gaussian transformation...
+                         : Preparing the Decorrelation transformation...
+<WARNING>                : <GetSQRootMatrix> error in matrix diagonalization; printed S and B
+<WARNING>                : Variable "tagB0" has zero, negative, or NaN RMS^2: -nan ==> set to zero. Please check the variable content
+<WARNING>                : Variable "tagB0" has zero, negative, or NaN RMS^2: -nan ==> set to zero. Please check the variable content
+TFHandler_Factory        :     Variable            Mean            RMS    [        Min            Max ]
+                         : -------------------------------------------------------------------------------
+                         :         bLBS:       0.27776        1.0000   [       -3.4728        6.2749 ]
+                         :  bCosAlphaBS:       -1.6848        1.0000   [       -8.0583       0.86758 ]
+                         :       bVtxCL:      0.071064        1.0000   [       -3.2223        6.0812 ]
+                         : kstTrkmDCABS:     0.0056702        1.0000   [       -6.0856        7.9934 ]
+                         : kstTrkpDCABS:   -0.00016530        1.0000   [       -5.3592        8.4849 ]
+                         :        mu1Pt:      0.027932        1.0000   [       -3.3010        7.0710 ]
+                         :        mu2Pt:      0.018680        1.0000   [       -4.7861        5.3048 ]
+                         :    kstTrkmPt:      0.038515        1.0000   [       -3.7730        5.6332 ]
+                         :    kstTrkpPt:      0.038862        1.0000   [       -3.7146        5.5931 ]
+                         :        tagB0:   -1.9630e+05        0.0000   [   -1.9630e+05   -1.9630e+05 ]
+                         : -------------------------------------------------------------------------------
+                         : Ranking input variables (method unspecific)...
+IdTransformation         : Ranking result (top variable is best ranked)
+                         : -------------------------------------
+                         : Rank : Variable     : Separation
+                         : -------------------------------------
+                         :    1 : bCosAlphaBS  : 7.089e-02
+                         :    2 : bVtxCL       : 5.460e-02
+                         :    3 : kstTrkpPt    : 2.090e-02
+                         :    4 : kstTrkmPt    : 2.072e-02
+                         :    5 : bLBS         : 1.974e-02
+                         :    6 : kstTrkpDCABS : 6.061e-03
+                         :    7 : kstTrkmDCABS : 5.163e-03
+                         :    8 : mu1Pt        : 2.244e-03
+                         :    9 : mu2Pt        : 1.341e-03
+                         :   10 : tagB0        : 9.012e-08
+                         : -------------------------------------
+Factory                  : Train method: BDTs for Classification
+                         : 
+                         : Preparing the Decorrelation transformation...
+TFHandler_BDTs           :     Variable            Mean            RMS    [        Min            Max ]
+                         : -------------------------------------------------------------------------------
+                         :         bLBS:      -0.13356        1.0000   [       -11.932        27.324 ]
+                         :  bCosAlphaBS:        284.97        1.0000   [       -111.31        285.28 ]
+                         :       bVtxCL:        1.4712        1.0000   [      -0.58080        3.5244 ]
+                         : kstTrkmDCABS:     -0.023634        1.0000   [       -46.487        294.09 ]
+                         : kstTrkpDCABS:      0.021682        1.0000   [       -254.28        43.694 ]
+                         :        mu1Pt:        1.1937        1.0000   [      0.021623        33.349 ]
+                         :        mu2Pt:        1.8137        1.0000   [       -12.820        40.874 ]
+                         :    kstTrkmPt:       0.71007        1.0000   [       -6.1274        39.016 ]
+                         :    kstTrkpPt:       0.63890        1.0000   [       -6.3183        38.084 ]
+                         :        tagB0:        1.0671        1.0000   [       -7.2684        9.2398 ]
+                         : -------------------------------------------------------------------------------
+BDTs                     : #events: (reweighted) sig: 1.14642e+06 bkg: 1.14642e+06
+                         : #events: (unweighted) sig: 1700784 bkg: 592049
+                         : Training 250 Decision Trees ... patience please
+0%, time left: unknown
+6%, time left: 12 mins
+13%, time left: 11 mins
+19%, time left: 10 mins
+25%, time left: 9 mins
+32%, time left: 8 mins
+38%, time left: 8 mins
+44%, time left: 7 mins
+50%, time left: 6 mins
+56%, time left: 5 mins
+63%, time left: 297 sec
+69%, time left: 248 sec
+75%, time left: 196 sec
+82%, time left: 146 sec
+88%, time left: 98 sec
+94%, time left: 47 sec
+                         : Elapsed time for training with 2292833 events: 893 sec         
+BDTs                     : [dataset_norm1C] : Evaluation of BDTs on training sample (2292833 events)
+0%, time left: unknown
+6%, time left: 55 sec
+12%, time left: 51 sec
+18%, time left: 48 sec
+25%, time left: 43 sec
+31%, time left: 40 sec
+37%, time left: 36 sec
+43%, time left: 33 sec
+50%, time left: 29 sec
+56%, time left: 25 sec
+62%, time left: 21 sec
+68%, time left: 18 sec
+75%, time left: 14 sec
+81%, time left: 10 sec
+87%, time left: 7 sec
+93%, time left: 3 sec
+                         : Elapsed time for evaluation of 2292833 events: 59.2 sec       
+                         : Creating xml weight file: [0;36mdataset_norm1C/weights/TMVAClassification_BDTs.weights.xml[0m
+                         : Creating standalone class: [0;36mdataset_norm1C/weights/TMVAClassification_BDTs.class.C[0m
+Factory                  : Training finished
+                         : 
+                         : Ranking input variables (method specific)...
+BDTs                     : Ranking result (top variable is best ranked)
+                         : ----------------------------------------------
+                         : Rank : Variable     : Variable Importance
+                         : ----------------------------------------------
+                         :    1 : bVtxCL       : 1.810e-01
+                         :    2 : kstTrkpPt    : 1.321e-01
+                         :    3 : kstTrkmPt    : 1.279e-01
+                         :    4 : bLBS         : 1.250e-01
+                         :    5 : tagB0        : 9.722e-02
+                         :    6 : kstTrkpDCABS : 9.537e-02
+                         :    7 : bCosAlphaBS  : 9.305e-02
+                         :    8 : mu1Pt        : 5.850e-02
+                         :    9 : kstTrkmDCABS : 5.795e-02
+                         :   10 : mu2Pt        : 3.189e-02
+                         : ----------------------------------------------
+Factory                  : === Destroy and recreate all methods via weight files for testing ===
+                         : 
+                         : Reading weight file: [0;36mdataset_norm1C/weights/TMVAClassification_BDTs.weights.xml[0m
+Factory                  : [1mTest all methods[0m
+Factory                  : Test method: BDTs for Classification performance
+                         : 
+BDTs                     : [dataset_norm1C] : Evaluation of BDTs on testing sample (982644 events)
+0%, time left: unknown
+6%, time left: 21 sec
+12%, time left: 19 sec
+18%, time left: 18 sec
+25%, time left: 16 sec
+31%, time left: 15 sec
+37%, time left: 13 sec
+43%, time left: 12 sec
+50%, time left: 10 sec
+56%, time left: 9 sec
+62%, time left: 8 sec
+68%, time left: 6 sec
+75%, time left: 5 sec
+81%, time left: 4 sec
+87%, time left: 2 sec
+93%, time left: 1 sec
+                         : Elapsed time for evaluation of 982644 events: 22.2 sec       
+Factory                  : [1mEvaluate all methods[0m
+Factory                  : Evaluate classifier: BDTs
+                         : 
+TFHandler_BDTs           :     Variable            Mean            RMS    [        Min            Max ]
+                         : -------------------------------------------------------------------------------
+                         :         bLBS:      -0.13297       0.99850   [       -12.936        31.369 ]
+                         :  bCosAlphaBS:        284.97       0.96115   [        1.3790        285.27 ]
+                         :       bVtxCL:        1.4717        1.0002   [      -0.66815        3.2761 ]
+                         : kstTrkmDCABS:     -0.024239       0.97369   [       -36.185        207.75 ]
+                         : kstTrkpDCABS:      0.021461        1.0036   [       -263.44        48.903 ]
+                         :        mu1Pt:        1.1938       0.99893   [      0.054517        53.166 ]
+                         :        mu2Pt:        1.8147       0.99988   [       -10.227        40.980 ]
+                         :    kstTrkmPt:       0.71060        1.0008   [       -5.3692        45.871 ]
+                         :    kstTrkpPt:       0.63878        1.0014   [       -5.2958        31.206 ]
+                         :        tagB0:        1.0656        1.0001   [       -5.1312        10.652 ]
+                         : -------------------------------------------------------------------------------
+BDTs                     : [dataset_norm1C] : Loop over test events and fill histograms with classifier response...
+                         : 
+TFHandler_BDTs           :     Variable            Mean            RMS    [        Min            Max ]
+                         : -------------------------------------------------------------------------------
+                         :         bLBS:      -0.13297       0.99850   [       -12.936        31.369 ]
+                         :  bCosAlphaBS:        284.97       0.96115   [        1.3790        285.27 ]
+                         :       bVtxCL:        1.4717        1.0002   [      -0.66815        3.2761 ]
+                         : kstTrkmDCABS:     -0.024239       0.97369   [       -36.185        207.75 ]
+                         : kstTrkpDCABS:      0.021461        1.0036   [       -263.44        48.903 ]
+                         :        mu1Pt:        1.1938       0.99893   [      0.054517        53.166 ]
+                         :        mu2Pt:        1.8147       0.99988   [       -10.227        40.980 ]
+                         :    kstTrkmPt:       0.71060        1.0008   [       -5.3692        45.871 ]
+                         :    kstTrkpPt:       0.63878        1.0014   [       -5.2958        31.206 ]
+                         :        tagB0:        1.0656        1.0001   [       -5.1312        10.652 ]
+                         : -------------------------------------------------------------------------------
+                         : 
+                         : Evaluation results ranked by best signal efficiency and purity (area)
+                         : -------------------------------------------------------------------------------------------------------------------
+                         : DataSet       MVA                       
+                         : Name:         Method:          ROC-integ
+                         : dataset_norm1C BDTs           : 0.701
+                         : -------------------------------------------------------------------------------------------------------------------
+                         : 
+                         : Testing efficiency compared to training efficiency (overtraining check)
+                         : -------------------------------------------------------------------------------------------------------------------
+                         : DataSet              MVA              Signal efficiency: from test sample (from training sample) 
+                         : Name:                Method:          @B=0.01             @B=0.10            @B=0.30   
+                         : -------------------------------------------------------------------------------------------------------------------
+                         : dataset_norm1C       BDTs           : 0.033 (0.034)       0.241 (0.244)      0.569 (0.572)
+                         : -------------------------------------------------------------------------------------------------------------------
+                         : 
+Dataset:dataset_norm1C   : Created tree 'TestTree' with 982644 events
+                         : 
+Dataset:dataset_norm1C   : Created tree 'TrainTree' with 2292833 events
+                         : 
+Factory                  : [1mThank you for using TMVA![0m
+                         : [1mFor citation information, please visit: http://tmva.sf.net/citeTMVA.html[0m
+Fontconfig error: Cannot load default config file: No such file: (null)
+Info in <TCanvas::Print>: file dataset_norm1C/plots/ROC_ClassificationBDT.png has been created
