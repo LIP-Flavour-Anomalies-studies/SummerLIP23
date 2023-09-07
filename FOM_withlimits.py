@@ -74,12 +74,15 @@ def calc_fom(v,signal,background,minv,maxv,fs,fb,show_upper,legend):
     fom=[]
     fom_opposite=[]
 
+    print (np.sum(signal[v]>minv))
     for i in var_range:
         s=0;b=0;f=0
         #print(i)
 
         #print(signal.size)
         s = np.sum(signal[v] > i)
+        #ss=signal[v].shape(0)
+        print("s",s)
         s=s*fs
         b = np.sum(background[v] > i)
         b=b*fb
@@ -129,27 +132,32 @@ def calc_fom(v,signal,background,minv,maxv,fs,fb,show_upper,legend):
             v=v.replace("/", "_div_")    
 
 
+def read_factors():
+
+    left_edge,right_edge,fb,fs=utils_fom.get_factors("/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/Fit_Results/B0Fit_3.5sigma_results.txt")
+
+    sel_b="(tagged_mass<" + left_edge+ ") | (tagged_mass>" +right_edge + ")"
+    sel_s="(tagged_mass>" + left_edge+ ") & (tagged_mass<" +right_edge + ")"
+
+    return sel_b,sel_s,fb,fs
 
 
-left_edge,right_edge,fb,fs=utils_fom.get_factors("/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/Fit_Results/B0Fit_3.5sigma_results.txt")
+def main():
+    sel_b,sel_s,fb,fs=read_factors()
+    df["var_name"]=df["var_name"].str.strip()
+    for v in df["var_name"]:  
+        print(v)
+        composite_value = df.loc[df["var_name"] == v, "composite"].iloc[0]
+        minv= df.loc[df["var_name"] == v, "min"].iloc[0]
+        maxv= df.loc[df["var_name"] == v, "max"].iloc[0]
+        show_upper=df.loc[df["var_name"] == v, "show_upper"].iloc[0]
+        legend=df.loc[df["var_name"] == v, "legend"].iloc[0]
+        print(minv,maxv)
+        if composite_value==0:
+            signal,back=get_signal_normal(v,sel_s,sel_b)
+        elif (composite_value)==1:
+            signal,back=get_signal_composite(v,sel_s,sel_b)
+        calc_fom(v,signal,back,minv,maxv,fs,fb,show_upper,legend)
 
-sel_b="(tagged_mass<" + left_edge+ ") | (tagged_mass>" +right_edge + ")"
-sel_s="(tagged_mass>" + left_edge+ ") & (tagged_mass<" +right_edge + ")"
-
-
-
-
-df["var_name"]=df["var_name"].str.strip()
-for v in df["var_name"]:  
-    print(v)
-    composite_value = df.loc[df["var_name"] == v, "composite"].iloc[0]
-    minv= df.loc[df["var_name"] == v, "min"].iloc[0]
-    maxv= df.loc[df["var_name"] == v, "max"].iloc[0]
-    show_upper=df.loc[df["var_name"] == v, "show_upper"].iloc[0]
-    legend=df.loc[df["var_name"] == v, "legend"].iloc[0]
-    print(minv,maxv)
-    if composite_value==0:
-        signal,back=get_signal_normal(v,sel_s,sel_b)
-    elif (composite_value)==1:
-        signal,back=get_signal_composite(v,sel_s,sel_b)
-    calc_fom(v,signal,back,minv,maxv,fs,fb,show_upper,legend)
+if __name__ == '__main__':
+    main()
