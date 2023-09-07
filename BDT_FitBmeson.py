@@ -38,10 +38,39 @@ tree = root_file.Get("ntuple")
 #Create de B-candidate mass histogram
 hmass = TH1F("hmass",";B-candidate mass (GeV)", bins, mmin, mmax)
 
+
+
+def get_value(line):
+    value=""
+    
+    for c in line:
+        if c.isdigit() or c=="." or c=="-":
+            value += c
+        else:
+            break
+    return value
+
+
+# Get the BDT score from the .txt file
+file=open("/user/j/joaobss/SummerLIP23/dataset_norm1C/plots/BDT_fom.txt","r")
+str1="BDT score"
+
+# Get the BDT score from the .txt file
+for line in file:
+   if str1 in line:
+      bdt_cut=get_value(line)
+
+
+#print(bdt_cut)
+   
+
+
+
 #Fill it in
 for index, event in enumerate(tree):
-  hmass.Fill(event.tagged_mass)
-  #if index > tree.GetEntries(): break
+   if event.bdt_score > float(bdt_cut):
+      hmass.Fill(event.tagged_mass)
+      #if index > tree.GetEntries(): break
 
 
 #list to store needed values
