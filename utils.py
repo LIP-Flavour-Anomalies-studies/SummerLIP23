@@ -47,8 +47,9 @@ def prepdata(data,data_mc):
     
     TreeS=data_mc["ntuple"]
     TreeB=data["ntuple"]
-    signal=TreeS.arrays(columns,cut=sel_s,entry_start=0 , entry_stop=10)
-    background=TreeB.arrays(columns,cut=sel_b,entry_start=0 , entry_stop=10)
+    signal=TreeS.arrays(columns,cut=sel_s, entry_start=0 , entry_stop=10000)
+    background=TreeB.arrays(columns,cut=sel_b, entry_start=0 , entry_stop=10000)
+    print("size of array: ", len(signal)) #24294673
 
     stages=columns
     #stages=["var1","var2","var3","var4"]
