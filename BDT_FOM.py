@@ -22,6 +22,7 @@ BDTscore_branch = testTree["BDTs"].array(library="pd")
 signal = BDTscore_branch[classID_branch==0]
 background = BDTscore_branch[classID_branch==1]
 
+
 #min/max values of the BDT scores
 minv=BDTscore_branch.min()
 maxv=BDTscore_branch.max()
@@ -75,7 +76,7 @@ def calc_fom(signal,background,minv,maxv,fs,fb,show_upper=0):
     print(f"Best cut: BDT score={max_x}, FOM={max_y}")
 
     f = open("/user/j/joaobss/SummerLIP23/dataset_norm1C/plots/BDT_fom.txt", "w")
-    f.write(f"Best cut: \nBDT score = {max_x}, \nFOM = {max_y}")
+    f.write(f"{max_x}   #BDT score \n{max_y}    #FOM")
     f.close()
 
 
@@ -108,6 +109,7 @@ _, _ , fb, fs = utils_fom.get_factors("/user/j/joaobss/SummerLIP23/Fit_Results/B
 
 #calculate the BDT FOM
 calc_fom(signal,background,minv,maxv,fs,fb)
+
 
 
 file.close()

@@ -106,15 +106,6 @@ dataloader.AddVariable("tagB0")
 
 
 
-# features not used to train the BDT
-#dataloader.AddSpectator("bLBSE")
-#dataloader.AddSpectator("bLBDRatio := bLBS / bLBSE")                        #Composite var
-#dataloader.AddSpectator("bCosRatio := (1 - bCosAlphaBS) / bCosAlphaBSE")    #Composite var
-#dataloader.AddSpectator("tagged_mass")
-
-#signalWeight     = 0.6774
-#backgroundWeight = 0.8138
-
 signalWeight     = 1.0        #MC/signal
 backgroundWeight = 1.0        #dataset sidebands/background
 
