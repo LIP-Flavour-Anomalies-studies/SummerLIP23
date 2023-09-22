@@ -173,17 +173,6 @@ def main():
     nn_fpr, nn_tpr, nn_thresholds = metrics.roc_curve(test_y.detach().numpy(), yscore.detach().numpy())
     plot(nn_fpr,nn_tpr,ylabel="true positive rate", xlabel="false positive rate",name='ROC-curve-{}'.format(config))
 
-    #save model and file with the options used
-    PATH="/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/modelNN.pth"
-    torch.save(model.state_dict(), PATH)
-    fileopt= open("NNopts.txt",'w') 
-
-    for o in n_classes,n_feats,opt.hidden_size,opt.layers,opt.activation,opt.dropout:
-        fileopt.write(str(o)+"\n")
-
-    fileopt.close
-
-
 
 
 if __name__ == '__main__':
