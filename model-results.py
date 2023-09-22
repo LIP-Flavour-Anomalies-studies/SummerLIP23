@@ -40,7 +40,7 @@ def main():
         activation,
         dropout
     )
-    #model.load_state_dict(torch.load(PATH))
+    model.load_state_dict(torch.load(PATH))
     #model.eval()
 
 if __name__ == '__main__':
