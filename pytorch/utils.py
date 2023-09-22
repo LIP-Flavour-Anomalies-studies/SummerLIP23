@@ -1,7 +1,11 @@
 import torch
 import numpy as np
-import utils_fom
+#import utils_fom
 import pandas as pd
+import importlib
+import os
+os.chdir("/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/FOM/")
+utils_fom=importlib.import_module("utils_fom")
 
 class ClassificationDataset(torch.utils.data.Dataset):
 
