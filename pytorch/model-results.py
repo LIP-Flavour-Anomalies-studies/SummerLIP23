@@ -30,7 +30,7 @@ def main():
     n_classes,n_feats,hidden_size,layers,activation,dropout=load_options("NNopts.txt")
 
     #load model
-    PATH="/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/modelNN"
+    PATH="/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/pytorch/modelNN"
 
     model = pt.FeedforwardNetwork(
         n_classes,
@@ -40,7 +40,7 @@ def main():
         activation,
         dropout
     )
-    #model.load_state_dict(torch.load(PATH))
+    model.load_state_dict(torch.load(PATH))
     #model.eval()
 
 if __name__ == '__main__':
