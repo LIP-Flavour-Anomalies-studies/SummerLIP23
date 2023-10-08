@@ -7,6 +7,7 @@ import torch.nn as nn
 from matplotlib import pyplot as plt
 from sklearn import metrics
 import utils
+import pandas as pd
 
 
 class FeedforwardNetwork(nn.Module):
@@ -74,6 +75,10 @@ def plot(epochs, plottable, xlabel="Epoch", ylabel='', name=''):
     plt.plot(epochs, plottable)
     plt.savefig('%s.pdf' % (name), bbox_inches='tight')
 
+def save_opts(fname,**kwargs):
+    with open(fname, "w") as f:
+        for key, value in kwargs.items():
+            f.write(f"{value}\n")
 
 def main():
     parser = argparse.ArgumentParser()
@@ -116,6 +121,10 @@ def main():
     n_classes = torch.unique(dataset.y).shape[0]  
     n_feats = dataset.X.shape[1]
 
+    unique_classes = pd.unique(test_y.numpy())
+
+    print("Unique classes in the dataset:", unique_classes)
+
     # initialize the model
 
     model = FeedforwardNetwork(
@@ -126,6 +135,10 @@ def main():
         opt.activation,
         opt.dropout
     )
+
+    #save_opts("opts.txt",n_classes,n_feats,opt.hidden_size,opt.layers,opt.activation,opt.dropout,opt.batch_size)
+    save_opts("output.txt", n_classes=n_classes, n_feats=n_feats, hidden_size=opt.hidden_size,
+          layers=opt.layers, activation=opt.activation, dropout=opt.dropout, batch_size=opt.batch_size)
 
     # get an optimizer
     optims = {"adam": torch.optim.Adam, "sgd": torch.optim.SGD}
@@ -158,8 +171,20 @@ def main():
         valid_accs.append(evaluate(model, dev_X, dev_y))
         print('Valid acc: %.4f' % (valid_accs[-1]))
 
+    
     print('Final Test acc: %.4f' % (evaluate(model, test_X, test_y)))
-    # plot
+    
+    predicted_labels=predict(model,test_X)
+    #print(labels)
+
+    # Get readable labels for the predicted labels
+    class_names = {0: 'Negative', 1: 'Positive'}  # Modify this based on your class labels
+    readable_labels = [class_names[label.item()] for label in predicted_labels]
+
+    # Print some of the readable labels
+    print("Some of the readable labels:")
+    for i in range(min(10, len(readable_labels))):
+        print(f"Example {i + 1}: {readable_labels[i]}")
 
 
     config = "{}-{}-{}-{}-{}-{}-{}".format(opt.learning_rate, opt.hidden_size, opt.layers, opt.dropout, opt.activation, opt.optimizer, opt.batch_size)

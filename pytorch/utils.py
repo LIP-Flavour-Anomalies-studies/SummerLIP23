@@ -4,8 +4,11 @@ import numpy as np
 import pandas as pd
 import importlib
 import os
-os.chdir("/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/FOM/")
-utils_fom=importlib.import_module("utils_fom")
+#os.chdir("/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/FOM/")
+#utils_fom=importlib.import_module("/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/FOM/utils_fom")
+import sys
+sys.path.append('/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/FOM/')
+import utils_fom
 
 class ClassificationDataset(torch.utils.data.Dataset):
 
@@ -19,7 +22,7 @@ class ClassificationDataset(torch.utils.data.Dataset):
         train_y = labels
         
         self.X = torch.tensor(train_X, dtype=torch.float32)
-        self.y = torch.tensor(train_y, dtype=torch.long)
+        self.y = torch.tensor(train_y, dtype=torch.float32)
         
     def __len__(self):
         return len(self.X)
@@ -41,7 +44,7 @@ def get_variables(file):
     
 def prepdata(data,data_mc):
 
-    columns=get_variables("vars.csv")
+    columns=get_variables("/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/vars.csv")
     #columns=["bLBS","bLBSE","mu1Pt","mu2Pt"]
 
     left_edge,right_edge,fb,fs=utils_fom.get_factors("/user/u/u23madalenablanc/flavour-anomalies/SummerLIP23/Fit_Results/B0Fit_3.5sigma_results.txt")
@@ -69,7 +72,7 @@ def prepdata(data,data_mc):
         x[:nsignal,i]=signal[j]
         x[nsignal:,i]=background[j]
     
-    return x,y
+    return x,y,columns
 
 
 
